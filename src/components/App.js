@@ -1,5 +1,6 @@
 import React from "react";
 import { createGlobalStyle } from "styled-components";
+import Context from "../context";
 import Game from "./Game";
 
 const Global = createGlobalStyle`
@@ -15,7 +16,9 @@ const Global = createGlobalStyle`
 
 export default () => (
   <>
-    <Global />
-    <Game />
+    <Context>
+      <Global />
+      <Game />
+    </Context>
   </>
 );
