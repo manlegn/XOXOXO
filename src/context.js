@@ -10,6 +10,8 @@ const INITIAL_STATE = {
 export function reducer(state, action) {
   switch (action.type) {
     case "PLAYER_TURN":
+      if (state.squares[action.payload.index]) return state;
+
       return produce(state, draft => {
         draft.squares[action.payload.index] = state.currentPlayer;
         draft.currentPlayer = state.currentPlayer === "X" ? "O" : "X";
