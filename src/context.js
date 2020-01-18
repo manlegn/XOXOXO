@@ -1,5 +1,6 @@
 import React from "react";
 import { createContext, useReducer } from "react";
+import produce from "immer";
 
 const INITIAL_STATE = {
   squares: new Array(9).fill(null),
@@ -9,18 +10,10 @@ const INITIAL_STATE = {
 export function reducer(state, action) {
   switch (action.type) {
     case "PLAYER_TURN":
-      return {
-        ...state,
-        squares: state.squares.map((value, index) => {
-          if (index === action.payload.index) {
-            return state.currentPlayer;
-          }
-
-          return value;
-        }),
-        currentPlayer: state.currentPlayer === "X" ? "O" : "X"
-      };
-
+      return produce(state, draft => {
+        draft.squares[action.payload.index] = state.currentPlayer;
+        draft.currentPlayer = state.currentPlayer === "X" ? "O" : "X";
+      });
     default: {
       return state;
     }
