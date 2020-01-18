@@ -6,7 +6,7 @@ const Square = styled.button`
   border: 1px solid silver;
   font-size: 20vmin;
   width: 33.33333%;
-  height: 33.33333vh;
+  height: 33.33333%;
   cursor: pointer;
   outline: 0;
 
