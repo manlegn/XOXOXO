@@ -4,17 +4,23 @@ import produce from "immer";
 
 const INITIAL_STATE = {
   squares: new Array(9).fill(null),
-  currentPlayer: "X"
+  winner: false,
+  player: "O"
 };
 
 export function reducer(state, action) {
   switch (action.type) {
-    case "PLAYER_TURN":
-      if (state.squares[action.payload.index]) return state;
-
+    case "ADD_TOKEN":
       return produce(state, draft => {
-        draft.squares[action.payload.index] = state.currentPlayer;
-        draft.currentPlayer = state.currentPlayer === "X" ? "O" : "X";
+        draft.squares[action.payload.index] = state.player;
+      });
+    case "TOGGLE_PLAYER":
+      return produce(state, draft => {
+        draft.player = state.player === "X" ? "O" : "X";
+      });
+    case "SET_WINNER":
+      return produce(state, draft => {
+        draft.winner = action.payload.player;
       });
     default: {
       return state;

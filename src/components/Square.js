@@ -6,7 +6,8 @@ const Square = styled.button`
   background: transparent;
   text-transform: uppercase;
   transition: 0.2s all;
-  font-size: 20vmin;
+  font-size: ${({ value }) => (value ? "20vmin" : "0")};
+  opacity: ${({ winner }) => (winner ? "0.2" : "1")};
   font-weight: bold;
   width: 33.33333%;
   height: 33.33333%;
@@ -43,6 +44,8 @@ const Square = styled.button`
   }
 `;
 
-export default ({ value, onClick }) => (
-  <Square onClick={onClick}>{value}</Square>
+export default ({ value, winner, onClick }) => (
+  <Square onClick={onClick} value={value} winner={winner}>
+    {value}
+  </Square>
 );
