@@ -6,25 +6,26 @@ import Square from "./Square";
 import { calculateWinner } from "../utils";
 
 const Board = styled.div`
+  flex: 1;
   display: flex;
   flex-wrap: wrap;
+  box-sizing: border-box;
+  padding: 4vmin;
   max-width: 100vmin;
   transition: 0.4s all;
-  position: relative;
-  overflow: hidden;
   height: 100vmin;
   pointer-events: ${props => (props.winner ? "none" : "all")};
 `;
 
-const Winner = styled.div`
-  text-transform: uppercase;
+const Winner = styled.a`
   font-size: ${({ winner }) => (winner ? "100vmin" : "0")};
   font-weight: bold;
   position: absolute;
-  left: 50%;
-  top: 50%;
+  left: 50vmin;
+  top: 50vmin;
   transform: translate(-50%, -50%);
   transition: 0.2s all;
+  cursor: pointer;
 `;
 
 export default () => {
@@ -39,29 +40,41 @@ export default () => {
     dispatch({ type: "ADD_TOKEN", payload: { index } });
   };
 
+  const newGame = () => {
+    dispatch({ type: "RESET" });
+  };
+
   useEffect(() => {
     const { squares, player } = state;
     const winner = calculateWinner(squares);
+    const draw = !squares.includes(null);
 
     if (winner) {
       dispatch({ type: "SET_WINNER", payload: { player } });
     } else {
       dispatch({ type: "TOGGLE_PLAYER" });
     }
+
+    if (draw) {
+      dispatch({ type: "RESET" });
+    }
   }, [state.squares]);
 
   return (
-    <Board winner={state.winner}>
-      {state.squares.map((value, i) => (
-        <Square
-          key={i}
-          value={value}
-          onClick={() => handleClick(i)}
-          winner={state.winner}
-        />
-      ))}
-
-      <Winner winner={state.winner}>{state.winner}</Winner>
-    </Board>
+    <>
+      <Board winner={state.winner}>
+        {state.squares.map((value, i) => (
+          <Square
+            key={i}
+            value={value}
+            onClick={() => handleClick(i)}
+            winner={state.winner}
+          />
+        ))}
+      </Board>
+      <Winner winner={state.winner} onClick={() => newGame()}>
+        {state.winner}
+      </Winner>
+    </>
   );
 };

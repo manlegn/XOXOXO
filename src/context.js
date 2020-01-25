@@ -5,7 +5,8 @@ import produce from "immer";
 const INITIAL_STATE = {
   squares: new Array(9).fill(null),
   winner: false,
-  player: "O"
+  player: "O",
+  score: []
 };
 
 export function reducer(state, action) {
@@ -21,6 +22,12 @@ export function reducer(state, action) {
     case "SET_WINNER":
       return produce(state, draft => {
         draft.winner = action.payload.player;
+        draft.score.push(action.payload.player);
+      });
+    case "RESET":
+      return produce(state, draft => {
+        draft.squares = new Array(9).fill(null);
+        draft.winner = false;
       });
     default: {
       return state;

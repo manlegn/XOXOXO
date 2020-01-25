@@ -2,9 +2,8 @@ import React from "react";
 import styled from "styled-components";
 
 const Square = styled.button`
-  border: 1px solid silver;
+  border: 1px solid #ddd;
   background: transparent;
-  text-transform: uppercase;
   transition: 0.2s all;
   font-size: ${({ value }) => (value ? "20vmin" : "0")};
   opacity: ${({ winner }) => (winner ? "0.2" : "1")};
