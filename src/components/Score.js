@@ -5,12 +5,14 @@ import { StateContext } from "../context";
 const Score = styled.div`
   display: flex;
   align-items: flex-start;
+  align-self: start;
+  flex: 1;
   flex-wrap: wrap;
   box-sizing: border-box;
   line-height: 1;
   padding: 4vmin;
   font-weight: bold;
-  font-size: 8vmin;
+  font-size: 20vmin;
 `;
 
 export default () => {

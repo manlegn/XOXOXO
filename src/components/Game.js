@@ -8,6 +8,7 @@ const Game = styled.div`
   display: flex;
   position: relative;
   overflow: hidden;
+  flex-wrap: wrap;
 
   @media screen and (orientation: portrait) {
     flex-direction: column;

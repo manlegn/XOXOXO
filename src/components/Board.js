@@ -6,7 +6,7 @@ import Square from "./Square";
 import { calculateWinner } from "../utils";
 
 const Board = styled.div`
-  flex: 1;
+  flex: 0 1 100%;
   display: flex;
   flex-wrap: wrap;
   box-sizing: border-box;
